@@ -41,7 +41,7 @@ import AdminAddWomenProduct from './Component/Pages/admin/AdminAddWomenProduct'
 import AdminAddMenProduct from './Component/Pages/admin/AdminAddMenProduct'
 import AdminTikTok from './Component/Pages/admin/AdminTikTok'; 
 import AdminEditProduct from './Component/Pages/admin/AdminEditProduct';
-import AdminOrderDetail from './Component/Pages/Admin/AdminOrderDetail';
+import AdminOrderDetail from './Component/Pages/admin/AdminOrderDetail';
 import BankAccounts from './Component/Pages/admin/BankAccounts'
 
 // ✅ ADDED: Coupon Banner Component
