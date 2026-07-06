@@ -1,0 +1,1 @@
+import { registerUser } from '../controllers/userController.js';

@@ -1,0 +1,42 @@
+# Node Modules
+node_modules/
+Backend/node_modules/
+frontend/node_modules/
+
+# Environment Variables
+.env
+Backend/.env
+frontend/.env
+
+# Build Files
+dist/
+build/
+frontend/dist/
+frontend/build/
+Backend/dist/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Misc
+*.pem
+*.key
+*.p12"node_modules/" 
+"Backend/node_modules/" 
+"frontend/node_modules/" 
+".env" 
+"dist/" 
+"build/" 

@@ -1,0 +1,138 @@
+/* Cart Notification */
+.cart-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.notification-content {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  padding: 1rem 1.5rem;
+  min-width: 350px;
+  max-width: 450px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  border-left: 4px solid #4caf50;
+}
+
+.notification-icon {
+  background: #4caf50;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.notification-message {
+  flex: 1;
+}
+
+.notification-message h4 {
+  margin: 0 0 4px 0;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+}
+
+.notification-message p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.notification-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-cart-btn, .checkout-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.3s;
+}
+
+.view-cart-btn {
+  background: #f8f9fa;
+  color: #1a1a1a;
+  border: 1px solid #e0e0e0;
+}
+
+.view-cart-btn:hover {
+  background: #e0e0e0;
+}
+
+.checkout-btn {
+  background: #c6a43f;
+  color: #1a1a1a;
+}
+
+.checkout-btn:hover {
+  background: #a07f30;
+  transform: translateY(-2px);
+}
+
+.close-notification {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #999;
+  font-size: 0.8rem;
+  padding: 0;
+  margin-left: 0.5rem;
+}
+
+.close-notification:hover {
+  color: #f44336;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .cart-notification {
+    left: 10px;
+    right: 10px;
+    top: 10px;
+  }
+  
+  .notification-content {
+    flex-direction: column;
+    text-align: center;
+    min-width: auto;
+    padding: 1rem;
+  }
+  
+  .notification-actions {
+    width: 100%;
+  }
+  
+  .view-cart-btn, .checkout-btn {
+    flex: 1;
+    justify-content: center;
+  }
+}

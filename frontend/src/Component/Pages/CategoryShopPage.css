@@ -1,0 +1,235 @@
+.category-shop {
+  background: #f7f6f4;
+  min-height: 100vh;
+  color: #2c2c2c;
+}
+
+.category-hero {
+  background: linear-gradient(135deg, #1f1f1f 0%, #3a3a3a 100%);
+  color: #f7f6f4;
+  padding: 3rem 1.25rem;
+  text-align: center;
+}
+
+.category-hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.category-hero-eyebrow {
+  letter-spacing: 0.25em;
+  font-size: 0.75rem;
+  color: #c0c0c0;
+  margin-bottom: 0.75rem;
+}
+
+.category-hero h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.category-hero-subtitle {
+  color: #d4d4d4;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.category-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 1.5rem;
+  font-size: 0.875rem;
+}
+
+.category-hero-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.category-main {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+.category-toolbar {
+  margin-bottom: 1.5rem;
+}
+
+.category-toolbar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e2dd;
+}
+
+.toolbar-left h2 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.toolbar-left p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.category-tag {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.5rem;
+  background: #eee;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+}
+
+.toolbar-right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filter-toggle-btn,
+.view-btn,
+.sort-select {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.filter-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.sort-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 0.875rem;
+}
+
+.view-toggle {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.view-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+}
+
+.view-btn.active {
+  background: #2c2c2c;
+  color: #fff;
+}
+
+.category-products-wrap {
+  width: 100%;
+}
+
+.category-shop-error {
+  text-align: center;
+  padding: 4rem 1.5rem;
+}
+
+.category-shop-error button {
+  margin-top: 1rem;
+  min-height: 44px;
+  padding: 0.75rem 1.5rem;
+  background: #2c2c2c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.filter-drawer {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: min(360px, 90vw);
+  height: 100vh;
+  background: #fff;
+  z-index: 1100;
+  transition: right 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.filter-drawer.active {
+  right: 0;
+}
+
+.filter-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #eee;
+}
+
+.filter-drawer-header button {
+  min-height: 44px;
+  min-width: 44px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.filter-drawer-footer {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid #eee;
+}
+
+.apply-filters-btn {
+  width: 100%;
+  min-height: 44px;
+  background: #2c2c2c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.filter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1050;
+  border: none;
+  cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  .category-main {
+    padding: 2rem 1.5rem 4rem;
+  }
+}

@@ -1,0 +1,1895 @@
+/* ==========================================================================
+   CHECKOUT PAGE - PREMIUM E-COMMERCE DESIGN
+   FANCY IMPRESS - UK RETAIL
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+/* ==========================================================================
+   1. ROOT VARIABLES
+   ========================================================================== */
+
+:root {
+  --primary-dark: #0a0a0e;
+  --primary-charcoal: #1a1a2e;
+  --accent-gold: #c8a951;
+  --accent-gold-light: #d4b96a;
+  --accent-gold-dark: #a8893a;
+  --success-green: #10b981;
+  --success-green-light: #34d399;
+  --danger-red: #ef4444;
+  --warning-orange: #f59e0b;
+  --info-blue: #3b82f6;
+  --text-main: #1e1e2a;
+  --text-muted: #6c6c7a;
+  --text-light: #9ca3af;
+  --bg-white: #ffffff;
+  --bg-light: #ffffff;
+  --bg-slate: #ffffff;
+  --bg-dark: #f8f9fa;
+  --border-light: #e8e8ed;
+  --border-medium: #e2e4e9;
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 24px 56px rgba(0, 0, 0, 0.12);
+  --transition-fast: all 0.2s ease;
+  --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --font-premium: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-premium);
+  background: var(--bg-white);
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   2. CHECKOUT PAGE LAYOUT
+   ========================================================================== */
+
+.checkout-page {
+  min-height: 100vh;
+  background: var(--bg-white);
+  padding: 40px 0;
+}
+
+.checkout-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ==========================================================================
+   3. CHECKOUT HEADER
+   ========================================================================== */
+
+.checkout-header {
+  margin-bottom: 32px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 8px 0;
+  margin-bottom: 20px;
+  transition: var(--transition-fast);
+}
+
+.back-btn:hover {
+  color: var(--accent-gold);
+  gap: 12px;
+}
+
+.checkout-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
+
+/* Checkout Steps */
+.checkout-steps {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: var(--bg-white);
+  padding: 20px 32px;
+  border-radius: 60px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  background: var(--bg-white);
+  border: 2px solid var(--border-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: var(--transition-base);
+}
+
+.step-item.active .step-number {
+  background: var(--accent-gold);
+  border-color: var(--accent-gold);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(200, 169, 81, 0.2);
+}
+
+.step-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.step-item.active .step-label {
+  color: var(--accent-gold);
+}
+
+.step-line {
+  width: 60px;
+  height: 2px;
+  background: var(--border-light);
+  margin: 0 16px;
+}
+
+.step-item.active + .step-line {
+  background: var(--accent-gold);
+}
+
+/* ==========================================================================
+   4. CHECKOUT CONTENT (2 COLUMN LAYOUT)
+   ========================================================================== */
+
+.checkout-content {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.checkout-form {
+  flex: 2;
+  min-width: 300px;
+}
+
+.order-summary {
+  flex: 1.2;
+  min-width: 340px;
+  background: var(--bg-white);
+  border-radius: 24px;
+  padding: 28px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+  transition: var(--transition-base);
+}
+
+.order-summary:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==========================================================================
+   5. FORM STYLES
+   ========================================================================== */
+
+.form-step {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.form-section {
+  background: var(--bg-white);
+  border-radius: 24px;
+  padding: 28px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-base);
+}
+
+.form-section:hover {
+  border-color: var(--accent-gold-light);
+}
+
+.form-section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.form-section h3 svg {
+  color: var(--accent-gold);
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid var(--border-light);
+  border-radius: 14px;
+  font-size: 14px;
+  font-family: var(--font-premium);
+  color: var(--text-main);
+  background: var(--bg-white);
+  transition: var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(200, 169, 81, 0.1);
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  border-color: var(--accent-gold-light);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ==========================================================================
+   6. PAYMENT METHODS
+   ========================================================================== */
+
+.payment-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 2px solid var(--border-light);
+  border-radius: 18px;
+  cursor: pointer;
+  transition: var(--transition-base);
+  background: var(--bg-white);
+}
+
+.payment-option:hover {
+  border-color: var(--accent-gold-light);
+  background: var(--bg-white);
+  transform: translateX(4px);
+}
+
+.payment-option.selected {
+  border-color: var(--accent-gold);
+  background: rgba(200, 169, 81, 0.05);
+}
+
+.payment-option input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-gold);
+  cursor: pointer;
+}
+
+.payment-icon {
+  font-size: 32px;
+}
+
+.payment-info {
+  flex: 1;
+}
+
+.payment-info strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+
+.payment-info span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* Secure Badges */
+.secure-badges {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.secure-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--bg-white);
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+}
+
+/* ==========================================================================
+   7. FORM NAVIGATION BUTTONS
+   ========================================================================== */
+
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.nav-btn {
+  padding: 16px 32px;
+  border-radius: 16px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-base);
+  border: none;
+}
+
+.nav-btn.prev {
+  background: var(--bg-white);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-light);
+}
+
+.nav-btn.prev:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+  transform: translateX(-2px);
+}
+
+.nav-btn.next {
+  background: var(--primary-dark);
+  color: white;
+  flex: 1;
+}
+
+.nav-btn.next:hover {
+  background: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(200, 169, 81, 0.3);
+}
+
+.nav-btn.place-order {
+  background: linear-gradient(135deg, var(--success-green) 0%, var(--success-green-light) 100%);
+  color: white;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.nav-btn.place-order:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  gap: 14px;
+}
+
+.nav-btn.place-order:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   8. ORDER SUMMARY STYLES
+   ========================================================================== */
+
+.order-summary h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.order-summary h3 svg {
+  color: var(--accent-gold);
+}
+
+.order-items {
+  max-height: 380px;
+  overflow-y: auto;
+  margin-bottom: 24px;
+  padding-right: 8px;
+}
+
+.order-items::-webkit-scrollbar {
+  width: 4px;
+}
+
+.order-items::-webkit-scrollbar-track {
+  background: var(--border-light);
+  border-radius: 4px;
+}
+
+.order-items::-webkit-scrollbar-thumb {
+  background: var(--accent-gold);
+  border-radius: 4px;
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border-light);
+  transition: var(--transition-fast);
+}
+
+.order-item:hover {
+  background: var(--bg-white);
+  margin: 0 -8px;
+  padding: 16px 8px;
+  border-radius: 12px;
+}
+
+.item-image {
+  position: relative;
+  width: 65px;
+  height: 65px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--bg-white);
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-quantity {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background: var(--accent-gold);
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-xs);
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-details h4 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.item-details p {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-gold);
+}
+
+.item-save {
+  font-size: 10px;
+  color: var(--success-green);
+  background: rgba(16, 185, 129, 0.1);
+  padding: 2px 6px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 4px;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.item-actions button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  background: var(--bg-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.item-actions button:hover {
+  border-color: var(--accent-gold);
+  background: var(--accent-gold);
+  color: white;
+  transform: scale(1.05);
+}
+
+.item-actions .remove-btn:hover {
+  border-color: var(--danger-red);
+  background: var(--danger-red);
+  color: white;
+}
+
+.item-actions span {
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* Order Totals */
+.order-totals {
+  background: var(--bg-white);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-light);
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.total-row.discount {
+  color: var(--success-green);
+}
+
+.total-row.grand-total {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--primary-dark);
+  border-top: 2px solid var(--border-light);
+  margin-top: 8px;
+  padding-top: 16px;
+}
+
+.total-row.grand-total span:last-child {
+  color: var(--accent-gold);
+  font-size: 22px;
+}
+
+/* Shipping Info & Guarantee */
+.shipping-info,
+.guarantee,
+.help-contact {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--bg-white);
+  border-radius: 16px;
+  margin-bottom: 12px;
+  transition: var(--transition-fast);
+  border: 1px solid var(--border-light);
+}
+
+.shipping-info:hover,
+.guarantee:hover,
+.help-contact:hover {
+  background: var(--bg-white);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(4px);
+}
+
+.shipping-info svg,
+.guarantee svg,
+.help-contact svg {
+  color: var(--accent-gold);
+  flex-shrink: 0;
+}
+
+.shipping-info strong,
+.guarantee strong,
+.help-contact strong {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 2px;
+}
+
+.shipping-info p,
+.guarantee p,
+.help-contact p {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.help-contact a {
+  font-size: 11px;
+  color: var(--accent-gold);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.help-contact a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   9. EMPTY CART STATE
+   ========================================================================== */
+
+.checkout-empty {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--bg-white);
+  border-radius: 32px;
+  margin: 40px auto;
+  max-width: 500px;
+}
+
+.empty-cart-icon {
+  font-size: 80px;
+  margin-bottom: 24px;
+  opacity: 0.5;
+  animation: float 3s ease-in-out infinite;
+}
+
+.checkout-empty h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 12px;
+}
+
+.checkout-empty p {
+  font-size: 16px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.continue-shop-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  background: var(--accent-gold);
+  color: var(--primary-dark);
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.continue-shop-btn:hover {
+  gap: 14px;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(200, 169, 81, 0.3);
+}
+
+/* ==========================================================================
+   10. LOADING SPINNER
+   ========================================================================== */
+
+.spinner-small {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ==========================================================================
+   11. RESPONSIVE DESIGN
+   ========================================================================== */
+
+/* Tablet Landscape */
+@media (max-width: 1024px) {
+  .checkout-container {
+    padding: 0 24px;
+  }
+  
+  .checkout-content {
+    flex-direction: column;
+  }
+  
+  .order-summary {
+    position: static;
+    margin-top: 24px;
+  }
+  
+  .checkout-steps {
+    padding: 16px 24px;
+  }
+  
+  .step-line {
+    width: 40px;
+  }
+}
+
+/* Tablet Portrait */
+@media (max-width: 768px) {
+  .checkout-page {
+    padding: 20px 0;
+  }
+  
+  .checkout-header h1 {
+    font-size: 28px;
+  }
+  
+  .checkout-steps {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    border-radius: 24px;
+  }
+  
+  .step-line {
+    display: none;
+  }
+  
+  .step-item {
+    width: 100%;
+  }
+  
+  .form-section {
+    padding: 20px;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .order-summary {
+    min-width: auto;
+  }
+  
+  .nav-btn {
+    padding: 14px 24px;
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 576px) {
+  .checkout-container {
+    padding: 0 16px;
+  }
+  
+  .checkout-header h1 {
+    font-size: 24px;
+  }
+  
+  .checkout-steps {
+    padding: 16px;
+  }
+  
+  .form-section {
+    padding: 16px;
+  }
+  
+  .form-section h3 {
+    font-size: 16px;
+  }
+  
+  .payment-option {
+    padding: 14px 16px;
+  }
+  
+  .payment-icon {
+    font-size: 28px;
+  }
+  
+  .order-item {
+    gap: 10px;
+  }
+  
+  .item-image {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .item-details h4 {
+    font-size: 12px;
+  }
+  
+  .item-actions button {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .form-navigation {
+    flex-direction: column;
+  }
+  
+  .nav-btn.prev {
+    order: 2;
+  }
+  
+  .nav-btn.next,
+  .nav-btn.place-order {
+    order: 1;
+  }
+  
+  .secure-badges {
+    justify-content: center;
+  }
+  
+  .total-row.grand-total span:last-child {
+    font-size: 20px;
+  }
+}
+
+/* ==========================================================================
+   12. ANIMATIONS
+   ========================================================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.form-step {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+.order-summary {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* ==========================================================================
+   13. FORM VALIDATION STYLES
+   ========================================================================== */
+
+.form-group.error input,
+.form-group.error select,
+.form-group.error textarea {
+  border-color: var(--danger-red);
+}
+
+.error-message {
+  font-size: 11px;
+  color: var(--danger-red);
+  margin-top: 4px;
+  display: block;
+}
+
+/* ==========================================================================
+   14. FOCUS VISIBLE
+   ========================================================================== */
+
+*:focus-visible {
+  outline: 2px solid var(--accent-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   15. SELECT DROPDOWN CUSTOM
+   ========================================================================== */
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236c6c7a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px !important;
+}
+
+/* ==========================================================================
+   16. PRINT STYLES
+   ========================================================================== */
+
+@media print {
+  .checkout-header .back-btn,
+  .form-navigation,
+  .order-summary .item-actions {
+    display: none;
+  }
+  
+  .checkout-page {
+    background: white;
+    padding: 0;
+  }
+  
+  .checkout-container {
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  .order-summary {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+  
+  .form-section {
+    break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
+   17. UTILITY CLASSES
+   ========================================================================== */
+
+.text-center {
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: 16px;
+}
+
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+/* ==========================================================================
+   PAYMENT FORM STYLES - FIXED ICONS
+   ========================================================================== */
+
+.payment-details-section {
+  margin-top: 20px;
+  animation: fadeInUp 0.3s ease forwards;
+  background: var(--bg-white);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid var(--border-light);
+}
+
+.payment-details-section h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.payment-form {
+  margin-top: 0;
+}
+
+/* ===== FIXED: Input with icon wrapper ===== */
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-with-icon svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  z-index: 1;
+  pointer-events: none;
+  width: 18px;
+  height: 18px;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding: 14px 16px 14px 42px;
+  border: 1.5px solid var(--border-light);
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: var(--font-premium);
+  color: var(--text-main);
+  background: var(--bg-white);
+  transition: var(--transition-fast);
+}
+
+.input-with-icon input:focus {
+  outline: none;
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(200, 169, 81, 0.1);
+}
+
+.input-with-icon input::placeholder {
+  color: var(--text-light);
+  font-size: 13px;
+}
+
+/* Form row for two columns */
+.payment-form .form-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 0;
+}
+
+.payment-form .form-row .form-group {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+/* Form group spacing */
+.payment-form .form-group {
+  margin-bottom: 20px;
+}
+
+.payment-form .form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 8px;
+}
+
+.payment-form .form-group label .required {
+  color: var(--danger-red);
+  margin-left: 2px;
+}
+
+/* Error text styling */
+.error-text {
+  font-size: 11px;
+  color: var(--danger-red);
+  margin-top: 6px;
+  display: block;
+  font-weight: 500;
+}
+
+/* ===== FIXED: Secure note styling with icons ===== */
+.secure-note,
+.bank-info-note,
+.upi-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 12px;
+  font-size: 12px;
+  color: var(--success-green);
+  margin-top: 20px;
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.secure-note svg,
+.bank-info-note svg,
+.upi-note svg {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+}
+
+.bank-info-note {
+  background: rgba(200, 169, 81, 0.05);
+  color: var(--accent-gold);
+  border: 1px solid rgba(200, 169, 81, 0.15);
+}
+
+.upi-note {
+  background: rgba(59, 130, 246, 0.05);
+  color: var(--info-blue);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+}
+
+/* Card brand icons */
+.card-brands {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.card-brands span {
+  font-size: 20px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.card-brands span:hover {
+  opacity: 1;
+}
+
+/* CVV help tooltip */
+.cvv-help {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 4px;
+  cursor: help;
+}
+
+.cvv-help svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ==========================================================================
+   PAYMENT BADGES
+   ========================================================================== */
+
+.payment-badges {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.payment-badges span {
+  font-size: 10px;
+  padding: 2px 8px;
+  background: var(--bg-white);
+  border-radius: 12px;
+  color: var(--text-muted);
+  border: 1px solid var(--border-light);
+}
+
+/* Payment Info Styles */
+.paypal-info,
+.stripe-info,
+.apple-pay-info,
+.google-pay-info,
+.klarna-info {
+  padding: 16px;
+  background: var(--bg-white);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-light);
+}
+
+.payment-logo {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.paypal-info .payment-logo { color: #0070ba; }
+.stripe-info .payment-logo { color: #635bff; }
+.apple-pay-info .payment-logo { color: #000; }
+.google-pay-info .payment-logo { color: #4285f4; }
+.klarna-info .payment-logo { color: #ffb3c6; }
+
+.payment-features {
+  margin-top: 12px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+.feature svg {
+  color: var(--success-green);
+}
+
+.stripe-badges {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.stripe-badges span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.klarna-options {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.klarna-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: var(--transition-fast);
+}
+
+.klarna-option:hover {
+  background: rgba(255, 179, 198, 0.05);
+}
+
+.klarna-option input {
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+  accent-color: #ffb3c6;
+}
+
+.klarna-option strong {
+  display: block;
+  font-size: 13px;
+  color: var(--text-main);
+}
+
+.klarna-option span {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   STRIPE CARD ELEMENT
+   ========================================================================== */
+
+.stripe-payment-form {
+  margin-top: 20px;
+}
+
+.card-element-wrapper {
+  border: 1.5px solid var(--border-light);
+  border-radius: 12px;
+  padding: 14px 16px;
+  background: var(--bg-white);
+  transition: var(--transition-fast);
+}
+
+.card-element-wrapper:focus-within {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(200, 169, 81, 0.1);
+}
+
+.pay-now-btn,
+.paypal-redirect-btn,
+.confirm-transfer-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, var(--success-green) 0%, var(--success-green-light) 100%);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  transition: var(--transition-base);
+}
+
+.pay-now-btn:hover:not(:disabled),
+.paypal-redirect-btn:hover,
+.confirm-transfer-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+  gap: 14px;
+}
+
+.pay-now-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.paypal-container {
+  margin: 20px 0;
+  min-height: 200px;
+}
+
+/* ==========================================================================
+   DIRECT DEBIT & BANK TRANSFER
+   ========================================================================== */
+
+.direct-debit-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(16, 185, 129, 0.05);
+  border-radius: 12px;
+  margin: 16px 0;
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.direct-debit-info svg {
+  color: var(--success-green);
+  flex-shrink: 0;
+}
+
+.direct-debit-info strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 2px;
+}
+
+.direct-debit-info p {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.bank-transfer-info {
+  margin-top: 20px;
+}
+
+.bank-details-card {
+  background: var(--bg-white);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-light);
+}
+
+.bank-details-card h4 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.bank-detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-size: 13px;
+}
+
+.bank-detail-row span:first-child {
+  color: var(--text-muted);
+}
+
+.bank-detail-row strong {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+.transfer-instructions {
+  background: rgba(200, 169, 81, 0.05);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(200, 169, 81, 0.15);
+}
+
+.transfer-instructions strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-gold);
+}
+
+.transfer-instructions p {
+  font-size: 12px;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   PAYMENT STATUS OVERLAY
+   ========================================================================== */
+
+.payment-status-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.payment-status-card {
+  background: var(--bg-white);
+  border-radius: 20px;
+  padding: 2.5rem;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  animation: slideUp 0.4s ease;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+}
+
+.payment-status-card .spinning {
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+}
+
+.payment-status-card h3 {
+  font-size: 1.3rem;
+  margin: 0.5rem 0 0.3rem;
+  color: var(--text-main);
+}
+
+.payment-status-card p {
+  color: var(--text-muted);
+  margin: 0 0 1.5rem;
+}
+
+/* Status Icons */
+.status-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.status-icon.success {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+.status-icon.error {
+  background: #ffebee;
+  color: #e53e3e;
+}
+
+/* Status Details */
+.status-details {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: left;
+  margin: 1rem 0;
+  border: 1px solid var(--border-light);
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.status-row:last-child {
+  border-bottom: none;
+}
+
+.status-row span {
+  color: var(--text-muted);
+}
+
+.status-row strong {
+  color: var(--text-main);
+}
+
+.status-badge {
+  padding: 0.15rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-badge.paid {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+/* Retry Button */
+.retry-btn {
+  padding: 0.6rem 2rem;
+  background: var(--accent-gold);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.retry-btn:hover {
+  background: var(--accent-gold-dark);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   BANK TRANSFER - ADDITIONAL STYLES
+   ========================================================================== */
+
+.bank-detail-row .reference-code {
+  font-family: monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+}
+
+.copy-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.4rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+  background: var(--border-light);
+  color: var(--accent-gold);
+}
+
+.instruction-icon {
+  color: var(--warning-orange);
+  flex-shrink: 0;
+}
+
+.ref-highlight {
+  color: var(--accent-gold);
+  font-weight: 700;
+  font-family: monospace;
+}
+
+/* ==========================================================================
+   VALIDATION STYLES
+   ========================================================================== */
+
+.bank-input.error {
+  border-color: var(--danger-red) !important;
+  background-color: #fef2f2 !important;
+}
+
+.bank-input:focus.error {
+  border-color: var(--danger-red) !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+}
+
+.bank-input.success {
+  border-color: var(--success-green) !important;
+  background-color: #f0fdf4 !important;
+}
+
+.bank-input.success:focus {
+  border-color: var(--success-green) !important;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.1) !important;
+}
+
+.success-message {
+  color: var(--success-green);
+  font-size: 12px;
+  margin-top: 4px;
+  display: block;
+}
+
+.validating-spinner {
+  display: inline-block;
+  animation: spin 1s linear infinite;
+}
+
+/* Verification Status */
+.verification-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.verification-status.verifying {
+  background: #fef3c7;
+  color: #92400e;
+  border: 1px solid #fcd34d;
+}
+
+.verification-status.verified {
+  background: #d1fae5;
+  color: #065f46;
+  border: 1px solid #34d399;
+}
+
+.verification-status.rejected {
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #f87171;
+}
+
+.confirm-transfer-btn.verified {
+  background: var(--success-green);
+}
+
+.confirm-transfer-btn.verified:hover:not(:disabled) {
+  background: #047857;
+}
+
+.form-hint.warning {
+  color: #92400e;
+  background: #fef3c7;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-size: 13px;
+  border: 1px solid #fcd34d;
+}
+
+.payment-status-badge.pending {
+  background: #f59e0b;
+  color: #78350f;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+/* ==========================================================================
+   RESPONSIVE - ADDITIONAL
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .payment-badges {
+    display: none;
+  }
+  
+  .payment-option {
+    flex-wrap: wrap;
+  }
+  
+  .payment-info {
+    flex: 1;
+    min-width: 150px;
+  }
+  
+  .klarna-option {
+    flex-direction: column;
+  }
+  
+  .bank-detail-row {
+    flex-wrap: wrap;
+  }
+  
+  .bank-detail-row span {
+    min-width: 100%;
+    font-size: 0.75rem;
+  }
+  
+  .bank-detail-row strong {
+    font-size: 0.85rem;
+  }
+  
+  .transfer-instructions {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-status-card {
+    padding: 1.5rem;
+  }
+  
+  .status-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .status-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .payment-status-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .status-row {
+    font-size: 0.8rem;
+  }
+  
+  .payment-details-section {
+    padding: 14px;
+  }
+  
+  .payment-details-section h3 {
+    font-size: 14px;
+  }
+  
+  .input-with-icon svg {
+    left: 10px;
+    width: 14px;
+    height: 14px;
+  }
+  
+  .input-with-icon input {
+    padding: 10px 12px 10px 32px;
+    font-size: 12px;
+  }
+}
+
+
+/* Add to CheckoutPage.css */
+
+/* International Bank Notice */
+.international-bank-notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: linear-gradient(135deg, rgba(200, 169, 81, 0.08), rgba(200, 169, 81, 0.02));
+  border-radius: 12px;
+  border: 1px solid rgba(200, 169, 81, 0.2);
+  margin: 16px 0;
+}
+
+.international-bank-notice svg {
+  color: #c6a43f;
+  flex-shrink: 0;
+}
+
+.international-bank-notice span {
+  font-size: 14px;
+  color: #4a4a5e;
+}
+
+.international-bank-notice small {
+  font-size: 12px;
+  color: #6c6c7a;
+}
+
+/* Phone input with country flag */
+.phone-input-wrapper {
+  position: relative;
+}
+
+.phone-input-wrapper .country-code {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e1e2a;
+  z-index: 1;
+}
+
+.phone-input-wrapper input {
+  padding-left: 50px !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .international-bank-notice {
+    flex-direction: column;
+    text-align: center;
+    padding: 14px;
+  }
+  
+  .country-selector {
+    font-size: 14px;
+  }
+}

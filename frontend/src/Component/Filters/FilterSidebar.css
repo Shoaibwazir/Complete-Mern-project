@@ -1,0 +1,129 @@
+.filter-sidebar-content {
+  padding: 1rem 0;
+}
+
+.filter-clear {
+  margin-bottom: 1.5rem;
+  text-align: right;
+}
+
+.filter-clear button {
+  background: none;
+  border: none;
+  color: #c6a43f;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.filter-group {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.5rem;
+}
+
+.filter-group h4 {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+/* Price Range */
+.price-range input {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.price-values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* Size Buttons */
+.size-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.size-btn {
+  width: 45px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.size-btn.active {
+  background: #c6a43f;
+  border-color: #c6a43f;
+  color: white;
+}
+
+/* Color Options */
+.color-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.color-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.color-btn.active {
+  border-color: #c6a43f;
+  background: #fafafa;
+}
+
+.color-swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+}
+
+/* Rating Options */
+.rating-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rating-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 8px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.rating-btn.active {
+  border-color: #c6a43f;
+  background: #fafafa;
+}
+
+.rating-btn svg {
+  color: #ffc107;
+}
+
+/* Checkbox */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}

@@ -1,0 +1,74 @@
+/* Prevent admin dark-mode form styles from leaking into customer pages */
+
+@media (prefers-color-scheme: dark) {
+  .contact-page .contact-form .form-group input,
+  .contact-page .contact-form .form-group textarea,
+  .contact-page .contact-form .form-group select,
+  .returns-page .return-form .form-group input,
+  .returns-page .return-form .form-group textarea,
+  .returns-page .return-form .form-group select,
+  .checkout-page .payment-form .form-group input,
+  .checkout-page .payment-form .form-group select,
+  .checkout-page .payment-form .form-group textarea,
+  .checkout-page .input-with-icon input,
+  .auth-page .auth-input-wrap input {
+    background: #ffffff !important;
+    border-color: #e5e7eb !important;
+    color: #1a1a2e !important;
+  }
+
+  .contact-page .contact-form .form-group label,
+  .returns-page .return-form .form-group label,
+  .checkout-page .payment-form .form-group label {
+    color: #1a1a2e !important;
+  }
+
+  .contact-page .contact-form .form-group input::placeholder,
+  .returns-page .return-form .form-group input::placeholder,
+  .checkout-page .input-with-icon input::placeholder {
+    color: #9ca3af !important;
+  }
+}
+
+/* Icon padding — inputs with left icons must not overlap placeholder text */
+.checkout-page .input-with-icon input {
+  padding-left: 48px !important;
+}
+
+.checkout-page .input-with-icon svg,
+.checkout-page .input-with-icon .input-icon {
+  left: 16px !important;
+}
+
+.contact-page .contact-form .form-group label,
+.returns-page .return-form .form-group label {
+  color: #1a1a2e;
+  font-weight: 700;
+}
+
+.error-message-banner {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+}
+
+.paypal-setup-notice {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+  padding: 20px;
+  color: #92400e;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.paypal-setup-notice code {
+  background: rgba(0, 0, 0, 0.06);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}

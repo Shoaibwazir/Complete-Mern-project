@@ -1,0 +1,28 @@
+.auth-layout-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f7f6f4;
+}
+
+.auth-layout-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-layout-wrapper .auth-page {
+  min-height: auto;
+  flex: 1;
+  padding: 1.5rem 1.25rem 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .auth-layout-wrapper .auth-page {
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  .auth-layout-wrapper .auth-container {
+    min-height: auto;
+  }
+}

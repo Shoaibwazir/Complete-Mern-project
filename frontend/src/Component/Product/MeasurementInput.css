@@ -1,0 +1,181 @@
+/* Measurement Input Styles */
+.measurement-container {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+  margin-top: 1rem;
+}
+
+.measurement-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.measurement-header h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+}
+
+.measurement-header p {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+.measurement-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.measurement-tabs .tab {
+  padding: 0.6rem 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #6b7280;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.measurement-tabs .tab:hover {
+  color: #c6a43f;
+}
+
+.measurement-tabs .tab.active {
+  color: #c6a43f;
+  border-bottom: 2px solid #c6a43f;
+}
+
+.measurement-guide {
+  display: flex;
+  gap: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.guide-image img {
+  width: 100px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.guide-text h4 {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.guide-text ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.guide-text li {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.25rem;
+}
+
+.measurement-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.measurement-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.measurement-field label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field-icon {
+  font-size: 1rem;
+}
+
+.required {
+  color: #f44336;
+}
+
+.measurement-field input {
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  transition: all 0.3s;
+}
+
+.measurement-field input:focus {
+  outline: none;
+  border-color: #c6a43f;
+  box-shadow: 0 0 0 3px rgba(198, 164, 63, 0.1);
+}
+
+.field-help {
+  font-size: 0.7rem;
+  color: #9ca3af;
+}
+
+.measurement-notes {
+  margin-bottom: 1.5rem;
+}
+
+.measurement-notes label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.measurement-notes textarea {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.measurement-notes textarea:focus {
+  outline: none;
+  border-color: #c6a43f;
+}
+
+.measurement-warning {
+  display: flex;
+  gap: 0.8rem;
+  background: #ffebee;
+  border-radius: 8px;
+  padding: 0.8rem;
+  font-size: 0.75rem;
+  color: #c62828;
+}
+
+@media (max-width: 768px) {
+  .measurement-guide {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .measurement-fields {
+    grid-template-columns: 1fr;
+  }
+}

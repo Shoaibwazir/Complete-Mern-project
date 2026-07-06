@@ -1,0 +1,1104 @@
+/* AdminDiscounts.css - Complete with Modal Styles */
+
+/* ========================================
+   RESET & BASE
+   ======================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ========================================
+   LAYOUT
+   ======================================== */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f0f2f5;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.admin-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  transition: all 0.3s ease;
+  width: 100%;
+  max-width: calc(100% - 250px);
+  overflow-x: hidden;
+  position: relative;
+}
+
+.admin-discounts-container {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  background: #f0f2f5;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* ========================================
+   SIDEBAR WRAPPER
+   ======================================== */
+.admin-sidebar-wrapper {
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  width: 250px;
+  position: relative;
+  z-index: 100;
+}
+
+/* ========================================
+   MOBILE HEADER & NAVIGATION BUTTON
+   ======================================== */
+.mobile-header {
+  display: none;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  padding: 0.75rem 1rem;
+  align-items: center;
+  gap: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  min-height: 60px;
+  width: 100%;
+}
+
+.menu-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  flex-shrink: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.menu-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.02);
+}
+
+.menu-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.menu-toggle-btn svg {
+  transition: transform 0.3s ease;
+  color: #ffffff;
+}
+
+.menu-toggle-btn[aria-expanded="true"] svg {
+  transform: rotate(90deg);
+}
+
+.menu-label {
+  display: inline;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.mobile-header h2 {
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 600;
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-header-spacer {
+  width: 80px;
+  flex-shrink: 0;
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  animation: fadeIn 0.3s ease;
+  display: none;
+}
+
+.mobile-menu-overlay.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Mobile Close Button */
+.mobile-close-btn {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.mobile-close-btn svg {
+  color: #ffffff;
+}
+
+/* ========================================
+   DISCOUNTS HEADER
+   ======================================== */
+.discounts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border-radius: 16px;
+  color: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.header-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  flex-shrink: 0;
+}
+
+.header-text h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header-text p {
+  margin: 4px 0 0 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.add-discount-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.add-discount-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.add-discount-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+}
+
+.add-discount-btn.primary:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* ========================================
+   DISCOUNTS STATS
+   ======================================== */
+.discounts-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.stat-card {
+  background: #ffffff;
+  padding: 1.25rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.stat-card.total .stat-icon {
+  background: #e3f2fd;
+  color: #2196f3;
+}
+
+.stat-card.active .stat-icon {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+.stat-card.inactive .stat-icon {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.stat-card.used .stat-icon {
+  background: #fff3e0;
+  color: #ff9800;
+}
+
+.stat-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+.stat-info p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #718096;
+  font-weight: 500;
+}
+
+/* ========================================
+   DISCOUNTS TABLE
+   ======================================== */
+.discounts-table-container {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  overflow: hidden;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.discounts-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  min-width: 800px;
+}
+
+.discounts-table thead {
+  background: #f7fafc;
+}
+
+.discounts-table th {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: #4a5568;
+  border-bottom: 2px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.discounts-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #edf2f7;
+  color: #2d3748;
+  vertical-align: middle;
+}
+
+.discounts-table tr:hover {
+  background: #f7fafc;
+}
+
+/* Discount Code */
+.discount-code {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: #ebf4ff;
+  color: #2196f3;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+  font-family: monospace;
+}
+
+/* Type Badge */
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.type-badge.percentage {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+.type-badge.fixed {
+  background: #e3f2fd;
+  color: #2196f3;
+}
+
+/* Value */
+.value-cell {
+  font-weight: 600;
+}
+
+.value-percentage {
+  color: #4caf50;
+}
+
+.value-fixed {
+  color: #2196f3;
+}
+
+/* Usage Info */
+.usage-info {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.usage-number {
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.usage-separator {
+  color: #a0aec0;
+}
+
+.usage-limit {
+  color: #718096;
+  font-size: 0.8rem;
+}
+
+.usage-bar {
+  width: 60px;
+  height: 4px;
+  background: #edf2f7;
+  border-radius: 2px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.usage-fill {
+  height: 100%;
+  background: #667eea;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+/* Expiry Date */
+.expiry-date {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: #718096;
+}
+
+.expiry-icon {
+  color: #a0aec0;
+  font-size: 0.7rem;
+}
+
+/* Status Badge - Clickable */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.status-badge.active {
+  background: #e8f5e9;
+  color: #4caf50;
+}
+
+.status-badge.active:hover {
+  background: #4caf50;
+  color: #ffffff;
+}
+
+.status-badge.inactive {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.status-badge.inactive:hover {
+  background: #f44336;
+  color: #ffffff;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.action-buttons button {
+  padding: 0.3rem 0.6rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-btn {
+  background: #ebf4ff;
+  color: #2196f3;
+}
+
+.edit-btn:hover {
+  background: #2196f3;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.delete-btn {
+  background: #ffebee;
+  color: #f44336;
+}
+
+.delete-btn:hover {
+  background: #f44336;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+/* ========================================
+   NO DISCOUNTS
+   ======================================== */
+.no-discounts {
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.no-icon {
+  font-size: 4rem;
+  color: #a0aec0;
+  margin-bottom: 1rem;
+}
+
+.no-discounts h3 {
+  font-size: 1.3rem;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.no-discounts p {
+  color: #718096;
+  margin-bottom: 1.5rem;
+}
+
+/* ========================================
+   MODAL
+   ======================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  color: #f44336;
+  transform: rotate(90deg);
+}
+
+.modal-form {
+  padding: 2rem;
+}
+
+.modal-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.modal-form .form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #2d3748;
+  margin-bottom: 0.4rem;
+}
+
+.modal-form .form-group input,
+.modal-form .form-group select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  background: #f7fafc;
+  color: #2d3748;
+}
+
+.modal-form .form-group input:focus,
+.modal-form .form-group select:focus {
+  outline: none;
+  border-color: #667eea;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.modal-form .form-group input::placeholder {
+  color: #a0aec0;
+}
+
+.modal-form .form-group small {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+.modal-form .form-group.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  color: #2d3748;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.checkbox-label .checkmark {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e0;
+  border-radius: 4px;
+  display: inline-block;
+  position: relative;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.checkbox-label input:checked + .checkmark {
+  background: #667eea;
+  border-color: #667eea;
+}
+
+.checkbox-label input:checked + .checkmark::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 6px;
+  width: 6px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn-cancel {
+  background: #f7fafc;
+  color: #4a5568;
+  border: 2px solid #e2e8f0 !important;
+}
+
+.btn-cancel:hover {
+  background: #edf2f7;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* ========================================
+   DARK MODE SUPPORT
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+  .admin-discounts-container {
+    background: #1a202c;
+  }
+  
+  .stat-card {
+    background: #2d3748;
+  }
+  
+  .stat-info h3 {
+    color: #f7fafc;
+  }
+  
+  .stat-info p {
+    color: #a0aec0;
+  }
+  
+  .discounts-table-container {
+    background: #2d3748;
+  }
+  
+  .discounts-table thead {
+    background: #374151;
+  }
+  
+  .discounts-table th {
+    color: #a0aec0;
+    border-bottom-color: #4a5568;
+  }
+  
+  .discounts-table td {
+    color: #e2e8f0;
+    border-bottom-color: #4a5568;
+  }
+  
+  .discounts-table tr:hover {
+    background: #374151;
+  }
+  
+  .discount-code {
+    background: #1a3a5a;
+    color: #63b3ed;
+  }
+  
+  .usage-number {
+    color: #f7fafc;
+  }
+  
+  .usage-limit {
+    color: #a0aec0;
+  }
+  
+  .usage-bar {
+    background: #4a5568;
+  }
+  
+  .expiry-date {
+    color: #a0aec0;
+  }
+  
+  .no-discounts h3 {
+    color: #f7fafc;
+  }
+  
+  .no-discounts p {
+    color: #a0aec0;
+  }
+  
+  .modal-content {
+    background: #2d3748;
+  }
+  
+  .modal-header {
+    border-bottom-color: #4a5568;
+  }
+  
+  .modal-header h2 {
+    color: #f7fafc;
+  }
+  
+  .modal-form .form-group label {
+    color: #e2e8f0;
+  }
+  
+  .modal-form .form-group input,
+  .modal-form .form-group select {
+    background: #4a5568;
+    border-color: #4a5568;
+    color: #f7fafc;
+  }
+  
+  .modal-form .form-group input:focus,
+  .modal-form .form-group select:focus {
+    background: #4a5568;
+    border-color: #667eea;
+  }
+  
+  .modal-form .form-group input::placeholder {
+    color: #a0aec0;
+  }
+  
+  .modal-form .form-group small {
+    color: #a0aec0;
+  }
+  
+  .checkbox-label {
+    color: #e2e8f0;
+  }
+  
+  .checkbox-label .checkmark {
+    background: #4a5568;
+    border-color: #4a5568;
+  }
+  
+  .btn-cancel {
+    background: #374151;
+    color: #a0aec0;
+    border-color: #4a5568 !important;
+  }
+  
+  .btn-cancel:hover {
+    background: #4a5568;
+  }
+  
+  .mobile-header {
+    background: linear-gradient(135deg, #0d0d1a 0%, #0f1a2e 50%, #0a1a2e 100%);
+  }
+  
+  .admin-sidebar-wrapper {
+    background: #0d0d1a;
+  }
+  
+  .mobile-close-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .mobile-close-btn svg {
+    color: #f7fafc;
+  }
+  
+  .mobile-menu-overlay {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+   ======================================== */
+
+/* Keep your existing responsive breakpoints here */
+/* (Copy from previous version) */
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+*:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+@media (hover: none) {
+  .stat-card:hover {
+    transform: none;
+  }
+  
+  .add-discount-btn:hover {
+    transform: none;
+  }
+  
+  .edit-btn:hover,
+  .delete-btn:hover {
+    transform: none;
+  }
+  
+  .menu-toggle-btn:hover {
+    transform: none;
+  }
+  
+  .status-badge:hover {
+    transform: none;
+  }
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+@media print {
+  .mobile-header {
+    display: none !important;
+  }
+  
+  .admin-sidebar-wrapper {
+    display: none !important;
+  }
+  
+  .admin-discounts-container {
+    padding: 0 !important;
+    background: white !important;
+  }
+  
+  .discounts-header {
+    background: #f7fafc !important;
+    color: #2d3748 !important;
+  }
+  
+  .header-text h1 {
+    color: #2d3748 !important;
+  }
+  
+  .header-text p {
+    color: #4a5568 !important;
+  }
+  
+  .header-right {
+    display: none !important;
+  }
+  
+  .discounts-stats {
+    display: none !important;
+  }
+  
+  .action-buttons {
+    display: none !important;
+  }
+  
+  .mobile-menu-overlay {
+    display: none !important;
+  }
+  
+  .modal-overlay {
+    display: none !important;
+  }
+}
+
+
+
+/* AdminDiscounts.css - Add these styles */
+
+.spinning {
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Loading state */
+.admin-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  gap: 1rem;
+}
+
+.admin-loading .spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #c6a43f;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.admin-loading p {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Disabled input styles */
+.modal-form input:disabled,
+.modal-form select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f7fafc;
+}
+
+.modal-form .btn-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
