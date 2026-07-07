@@ -1,7 +1,7 @@
 // src/components/CouponBanner.jsx
 import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
-import couponService from './../../../../Backend/services/couponService';
+import couponService from './../../services/couponService';
 import './CouponBanner.css';
 
 const CouponBanner = () => {

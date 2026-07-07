@@ -1,6 +1,6 @@
 // src/Component/Admin/CouponManagement.jsx
 import React, { useState, useEffect } from 'react';
-import couponService from './../../../../../Backend/services/couponService';
+import couponService from './../../../services/couponService';
 import toast from 'react-hot-toast';
 import './CouponManagement.css';
 
