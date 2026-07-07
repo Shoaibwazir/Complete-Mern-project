@@ -2,23 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-    // Custom plugin to handle backend imports
-    {
-      name: 'ignore-backend',
-      resolveId(source) {
-        // Ignore any imports from Backend folder
-        if (source.includes('Backend/') || source.includes('/Backend/')) {
-          return { id: source, external: true }
-        }
-        return null
-      }
-    }
-  ],
+  plugins: [react(), tailwindcss()],
   
   server: {
     proxy: {
@@ -35,16 +20,22 @@ export default defineConfig({
     },
   },
   
-  // Build configuration
+  // ✅ YAHAN CHANGE KAREIN
   build: {
+    // Warning limit ko 2000 kB (2 MB) tak badha den
+    chunkSizeWarningLimit: 2000,
+    
     rollupOptions: {
-      external: (id) => {
-        // Exclude backend imports during build
-        if (id.includes('Backend/') || id.includes('/Backend/')) {
-          return true
-        }
-        return false
-      }
-    }
-  }
+      output: {
+        manualChunks: {
+          // Large libraries ko alag chunks mein daalen
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'redux-vendor': ['@reduxjs/toolkit', 'react-redux'],
+          'ui-vendor': ['framer-motion', 'lucide-react', 'react-icons'],
+          'payment-vendor': ['@stripe/react-stripe-js', '@stripe/stripe-js', '@paypal/react-paypal-js'],
+          'pdf-vendor': ['jspdf', 'html2canvas'],
+        },
+      },
+    },
+  },
 })
