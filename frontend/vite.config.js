@@ -23,12 +23,11 @@ export default defineConfig({
   // ✅ YAHAN CHANGE KAREIN
   build: {
     // Warning limit ko 2000 kB (2 MB) tak badha den
-    chunkSizeWarningLimit: 2000,
+    chunkSizeWarningLimit: 2000,  // 👈 YEH LINE ADD KAREIN
     
     rollupOptions: {
       output: {
         manualChunks: {
-          // Large libraries ko alag chunks mein daalen
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'redux-vendor': ['@reduxjs/toolkit', 'react-redux'],
           'ui-vendor': ['framer-motion', 'lucide-react', 'react-icons'],
