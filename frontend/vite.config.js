@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  
+
   server: {
     proxy: {
       '/api': {
@@ -19,20 +19,53 @@ export default defineConfig({
       },
     },
   },
-  
-  // ✅ YAHAN CHANGE KAREIN
+
   build: {
-    // Warning limit ko 2000 kB (2 MB) tak badha den
-    chunkSizeWarningLimit: 50000,  // 👈 YEH LINE ADD KAREIN
-    
+    // Large chunk warning limit
+    chunkSizeWarningLimit: 50000,
+
     rollupOptions: {
       output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'redux-vendor': ['@reduxjs/toolkit', 'react-redux'],
-          'ui-vendor': ['framer-motion', 'lucide-react', 'react-icons'],
-          'payment-vendor': ['@stripe/react-stripe-js', '@stripe/stripe-js', '@paypal/react-paypal-js'],
-          'pdf-vendor': ['jspdf', 'html2canvas'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+
+            if (
+              id.includes('react') ||
+              id.includes('react-dom') ||
+              id.includes('react-router-dom')
+            ) {
+              return 'react-vendor'
+            }
+
+            if (
+              id.includes('@reduxjs') ||
+              id.includes('react-redux')
+            ) {
+              return 'redux-vendor'
+            }
+
+            if (
+              id.includes('framer-motion') ||
+              id.includes('lucide-react') ||
+              id.includes('react-icons')
+            ) {
+              return 'ui-vendor'
+            }
+
+            if (
+              id.includes('@stripe') ||
+              id.includes('@paypal')
+            ) {
+              return 'payment-vendor'
+            }
+
+            if (
+              id.includes('jspdf') ||
+              id.includes('html2canvas')
+            ) {
+              return 'pdf-vendor'
+            }
+          }
         },
       },
     },
