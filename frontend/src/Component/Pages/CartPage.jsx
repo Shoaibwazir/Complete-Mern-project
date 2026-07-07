@@ -24,7 +24,7 @@ import {
 import { addToCart, removeFromCart, clearCart, updateCartQuantity } from '../../redux/slices/cartSlice';
 import toast from 'react-hot-toast';
 import { getImageUrl } from '../../utils/imageUrl';
-import couponService from './../../../../Backend/services/couponService';
+import couponService from './../../services/couponService';
 import './CartPage.css';
 
 const CartPage = () => {
