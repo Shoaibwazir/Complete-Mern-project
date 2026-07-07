@@ -23,7 +23,7 @@ export default defineConfig({
   // ✅ YAHAN CHANGE KAREIN
   build: {
     // Warning limit ko 2000 kB (2 MB) tak badha den
-    chunkSizeWarningLimit: 2000,  // 👈 YEH LINE ADD KAREIN
+    chunkSizeWarningLimit: 50000,  // 👈 YEH LINE ADD KAREIN
     
     rollupOptions: {
       output: {
