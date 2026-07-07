@@ -41,6 +41,7 @@ import {
 import { clearCart, removeFromCart } from '../../redux/slices/cartSlice';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import couponService from './../../services/couponService';
 import './CheckoutPage.css';
 
 // ========================================
