@@ -1,23 +1,23 @@
 // Backend/server.js
-// ✅ ADD Bank Verification Routes
+// ✅ PRODUCTION-READY for Vercel
 
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
-import dns from 'dns';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
-
-// ✅ Force IPv4 DNS
-dns.setDefaultResultOrder('ipv4first');
+import helmet from 'helmet';
+import compression from 'compression';
+import rateLimit from 'express-rate-limit';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config();
 
-// ✅ Route Imports
+// ✅ ROUTE IMPORTS
 import authRoutes from './routes/authRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
@@ -31,44 +31,53 @@ import discountRoutes from './routes/discountRoutes.js';
 import paymentRoutes from './routes/paymentRoute.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 import couponRoutes from './routes/couponRoutes.js';
-import bankVerificationRoutes from './routes/bankVerification.js'; // ✅ ADDED
+import bankVerificationRoutes from './routes/bankVerification.js';
 
 const app = express();
 
-// ========================================
 // ✅ MIDDLEWARE
-// ========================================
-
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-  credentials: true
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 
+app.use(cors({
+  origin: process.env.FRONTEND_URL || '*',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+  message: 'Too many requests, please try again later.'
+});
+app.use('/api', limiter);
+
+app.use(compression());
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// ========================================
-// ✅ ROUTES - REGISTER ALL ROUTES
-// ========================================
-
-// ── Root Route ──
+// ✅ ROUTES
 app.get('/', (req, res) => {
   res.json({
     success: true,
-    message: 'QASR-E-LIBAS LTD API is running!',
-    status: 'Healthy',
-    endpoints: {
-      auth: '/api/auth',
-      products: '/api/products',
-      orders: '/api/orders',
-      payments: '/api/payments',
-      coupons: '/api/coupons',
-      bankVerify: '/api/verify-bank-account'
-    }
+    message: 'QASR-E-LIBAS LTD API',
+    status: 'running',
+    environment: process.env.NODE_ENV || 'production'
   });
 });
 
-// ── API Routes ──
+app.get('/api/health', (req, res) => {
+  res.status(200).json({
+    success: true,
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
+  });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/orders', orderRoutes);
@@ -81,78 +90,66 @@ app.use('/api/contact/support-email', contactRoutes);
 app.use('/api/admin/discounts', discountRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/coupons', couponRoutes);
-
-// ✅ Bank Verification Routes
-app.use('/api', bankVerificationRoutes); // ← YEH IMPORTANT HAI
-
-// ── Payment Routes ──
 app.use('/api', paymentRoutes);
+app.use('/api', bankVerificationRoutes);
 
-// ── Static Files ──
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// ✅ 404 Handler
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: `Route ${req.originalUrl} not found`
+  });
+});
 
-// ========================================
+// ✅ Error Handler
+app.use((err, req, res, next) => {
+  console.error('❌ Error:', err.message);
+  res.status(err.statusCode || 500).json({
+    success: false,
+    message: err.message || 'Internal Server Error'
+  });
+});
+
 // ✅ MONGODB CONNECTION
-// ========================================
+mongoose.connect(process.env.MONGODB_URI, {
+  serverSelectionTimeoutMS: 30000,
+  connectTimeoutMS: 30000,
+  socketTimeoutMS: 45000,
+  maxPoolSize: 10,
+  minPoolSize: 2,
+  family: 4
+})
+.then(() => {
+  console.log('✅ MongoDB Connected');
 
-const connectDB = async () => {
-  const mongoURI = process.env.MONGODB_URI;
-  
-  if (!mongoURI) {
-    console.error('❌ MONGODB_URI not set in .env');
-    process.exit(1);
-  }
-
-  console.log('🔄 Connecting to MongoDB...');
-
-  try {
-    const conn = await mongoose.connect(mongoURI, {
-      serverSelectionTimeoutMS: 30000,
-      connectTimeoutMS: 30000,
-      socketTimeoutMS: 45000,
-      maxPoolSize: 10,
-      minPoolSize: 2,
-    });
-    
-    console.log('✅ MongoDB Connected Successfully!');
-    console.log('📊 Database:', conn.connection.name);
-    console.log('🌐 Host:', conn.connection.host);
-    
-    return conn;
-    
-  } catch (err) {
-    console.error('❌ MongoDB connection error:', err.message);
-    console.log('🔄 Retrying in 5 seconds...');
-    setTimeout(connectDB, 5000);
-    throw err;
-  }
-};
-
-// ========================================
-// ✅ START SERVER
-// ========================================
-
-const startServer = async () => {
-  try {
-    await connectDB();
-    
+  // Local development only - Vercel does not need app.listen()
+  if (process.env.NODE_ENV !== 'production') {
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => {
-      console.log('\n========================================');
-      console.log('✅ SERVER STARTED SUCCESSFULLY');
-      console.log('========================================');
-      console.log(`🌐 Server: http://localhost:${PORT}`);
-      console.log(`📦 API:    http://localhost:${PORT}/api`);
-      console.log(`🔐 Auth:   http://localhost:${PORT}/api/auth`);
-      console.log(`🏷️ Coupons: http://localhost:${PORT}/api/coupons`);
-      console.log(`🏦 Bank Verify: http://localhost:${PORT}/api/verify-bank-account`);
-      console.log('========================================');
-      console.log('🚀 Ready to accept requests!\n');
+      console.log(`✅ Server running on port ${PORT}`);
     });
-  } catch (err) {
-    console.error('❌ Failed to start server:', err.message);
-    setTimeout(startServer, 5000);
   }
-};
+})
+.catch(err => {
+  console.error('❌ MongoDB Connection Failed:', err.message);
+});
 
-startServer();
+mongoose.connection.on('error', (err) => {
+  console.error('❌ MongoDB Error:', err.message);
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.warn('⚠️ MongoDB Disconnected');
+});
+
+// ✅ Graceful Shutdown
+process.on('SIGTERM', () => {
+  mongoose.connection.close(() => process.exit(0));
+});
+
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => process.exit(0));
+});
+
+// ✅ EXPORT FOR VERCEL
+export default app;
