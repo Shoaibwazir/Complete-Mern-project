@@ -42,8 +42,8 @@ app.use(helmet({
 
 app.use(cors({
   origin: [
-    "https://complete-mern-project.vercel.app",
-    "http://localhost:5173"
+    "https://qasrelibas.co.uk",
+    "https://www.qasrelibas.co.uk"
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
