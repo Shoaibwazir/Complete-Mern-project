@@ -1,20 +1,21 @@
-const API_BASE =
-  import.meta.env.VITE_API_URL?.replace(/\/api\/?$/, '') || 'http://localhost:5000';
+import { assetUrl, API_BASE } from '../config/api';
 
 const PLACEHOLDER =
   'https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=500&fit=crop';
 
 /**
- * Resolve product/upload URLs so they work from the Vite dev server and production.
+ * Resolve product/upload URLs for dev (Vite proxy) and production (Vercel backend).
  */
 export function getImageUrl(url) {
   if (!url || url === 'undefined' || url === 'null') return PLACEHOLDER;
   if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('blob:')) {
     return url;
   }
-  if (url.startsWith('/uploads/')) return `${API_BASE}${url}`;
-  if (url.startsWith('uploads/')) return `${API_BASE}/${url}`;
-  return url.startsWith('/') ? url : `${API_BASE}/${url}`;
+  if (url.startsWith('/uploads/') || url.startsWith('uploads/')) {
+    const path = url.startsWith('/') ? url : `/${url}`;
+    return assetUrl(path);
+  }
+  return url.startsWith('/') ? assetUrl(url) : assetUrl(`/${url}`);
 }
 
 export function getProductImage(product) {

@@ -1,10 +1,9 @@
-// src/Component/HomePage/HomePage.jsx - TikTok Section
+// src/Component/HomePage/HomePage.jsx - Hero Section Only
 
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
-import couponService from './../../services/couponService';
 import axios from 'axios';
 import { FaTruck, FaShieldAlt, FaUndo, FaHeadset, FaStar, FaArrowRight } from 'react-icons/fa';
 import CartNotification from './../CartNotification/CartNotification';
@@ -27,33 +26,22 @@ const HomePage = () => {
   const [tiktokVideos, setTiktokVideos] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // ===== HERO SLIDES =====
   const slides = [
     {
-    id: 1,
-  badge: 'Exclusive Collection',
-  title: 'PARTY, BRIDAL & AFGHANI DRESSES',
-  subtitle: 'Elegance for every occasion',
-  description: 'From dazzling party gowns to timeless bridal wear and authentic handcrafted Afghani dresses — curated for weddings, celebrations, and every special moment',
-  image: traditional,
-  btnText: 'Explore Our Collection',
-  link: '/womens',
-},
+      id: 1,
+      image: traditional,
+      btnText: 'Explore Our Collection',
+      link: '/womens',
+    },
     {
       id: 2,
-      badge: 'Ganda Collection',
-      title: 'MENS COLLECTIONS',
-      subtitle: 'Heritage meets contemporary luxury',
-      description: 'Exquisite menswear rooted in Afghan tradition with premium tailoring',
       image: mendress,
-      btnText: 'Explore Men\'s Collection',
+      btnText: "Explore Men's Collection →",
       link: '/mens',
     },
     {
       id: 3,
-      badge: 'Fine Jewellery',
-      title: 'TIMELESS ELEGANCE',
-      subtitle: 'Traditional Jewellery Collection',
-      description: 'Handcrafted pieces that tell a story of culture and refinement',
       image: afghanjewellery,
       btnText: 'Explore Jewellery',
       link: '/accessories/jewellery',
@@ -74,10 +62,9 @@ const HomePage = () => {
     { name: "Shoes", image: shoes, link: "/accessories/shoes-sandals" },
   ];
 
-  // Function to clean TikTok URL and add parameters
+  // TikTok Functions
   const getCleanTikTokUrl = (url) => {
     if (!url) return '';
-    
     let videoId = '';
     const patterns = [
       /tiktok\.com\/embed\/v2\/(\d+)/,
@@ -85,7 +72,6 @@ const HomePage = () => {
       /tiktok\.com\/v\/(\d+)/,
       /vm\.tiktok\.com\/[^\/]+\/(\d+)/
     ];
-    
     for (const pattern of patterns) {
       const match = url.match(pattern);
       if (match) {
@@ -93,13 +79,10 @@ const HomePage = () => {
         break;
       }
     }
-    
     if (!videoId) return url;
-    
     return `https://www.tiktok.com/embed/v2/${videoId}?lang=en-US&autoplay=0&muted=1&loop=0&controls=1&rel=0&show_closed_caption=0&show_chat=0&show_follow=0&show_like=0&show_share=0&show_comments=0&disable_related=1`;
   };
 
-  // Fetch TikTok videos from API
   useEffect(() => {
     const fetchTikTokVideos = async () => {
       try {
@@ -113,20 +96,11 @@ const HomePage = () => {
         setTiktokVideos(cleanedVideos);
       } catch (error) {
         console.error('Error fetching TikTok videos:', error);
-        // Fallback videos
-        setTiktokVideos([
-          {
-            _id: 1,
-            videoUrl: 'https://www.tiktok.com/embed/v2/1234567890123456789?lang=en-US&autoplay=0&muted=1&rel=0&disable_related=1',
-            title: 'Our Latest Collection',
-            description: ''
-          }
-        ]);
+        setTiktokVideos([]);
       } finally {
         setLoading(false);
       }
     };
-    
     fetchTikTokVideos();
   }, []);
 
@@ -134,48 +108,8 @@ const HomePage = () => {
     setNotification({ show: false, product: null });
   };
 
-  const handleAddToCart = (e, product) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setNotification({ show: true, product: product });
-  };
-
-  const handleBuyNow = (e, product) => {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    const singleItem = {
-      _id: product.id,
-      name: product.name,
-      price: product.price,
-      originalPrice: product.oldPrice,
-      image: product.image,
-      quantity: 1,
-      material: product.material
-    };
-    
-    localStorage.setItem('buyNowItem', JSON.stringify(singleItem));
-    navigate('/checkout', { state: { buyNow: true, product: singleItem } });
-  };
-
-  const handleProductClick = (productId) => {
-    navigate(`/product/${productId}`);
-  };
-
-  const renderStars = (rating) => {
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    
-    for (let i = 0; i < fullStars; i++) stars.push(<FaStar key={`full-${i}`} className="star-filled" />);
-    if (hasHalfStar) stars.push(<FaStar key="half" className="star-half-filled" />);
-    for (let i = stars.length; i < 5; i++) stars.push(<FaStar key={`empty-${i}`} className="star-empty" />);
-    return stars;
-  };
-
   return (
     <div className="homepage">
-      {/* Cart Notification */}
       {notification.show && (
         <CartNotification 
           product={notification.product} 
@@ -183,7 +117,7 @@ const HomePage = () => {
         />
       )}
 
-      {/* Hero Slider */}
+      {/* ===== HERO SLIDER ===== */}
       <Swiper
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
         effect="fade"
@@ -196,25 +130,24 @@ const HomePage = () => {
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>
-            <div className="hero-slide" style={{ backgroundImage: `url(${slide.image})` }}>
-              <div className="hero-overlay" />
-              <div className="hero-content">
-                <div className="hero-content-box">
-                  <span className="hero-badge">{slide.badge}</span>
-                  <h1 className="hero-title">{slide.title}</h1>
-                  <p className="hero-subtitle">{slide.subtitle}</p>
-                  <p className="hero-desc">{slide.description}</p>
-                  <Link to={slide.link} className="hero-btn">
-                    {slide.btnText} <FaArrowRight />
-                  </Link>
-                </div>
+            <div className="hero-slide">
+              <img
+                src={slide.image}
+                alt=""
+                className="hero-slide-img"
+              />
+              <div className="hero-overlay-clean" />
+              <div className="hero-content-clean">
+                <Link to={slide.link} className="hero-btn-clean">
+                  {slide.btnText} <FaArrowRight />
+                </Link>
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* Features Section */}
+      {/* ===== FEATURES SECTION ===== */}
       <section className="features-section">
         <div className="container">
           <div className="features-grid">
@@ -229,31 +162,31 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Categories Section - Full Width */}
-<section className="categories-section">
-  <div className="categories-container">
-    <div className="section-header">
-      <span className="section-subtitle">Shop by Category</span>
-      <h2 className="section-title">Explore Our Collections</h2>
-      <div className="section-divider"></div>
-    </div>
-    <div className="categories-grid">
-      {categories.map((category, index) => (
-        <Link to={category.link} key={index} className="category-card">
-          <div className="category-image">
-            <img src={category.image} alt={category.name} />
-            <div className="category-overlay">
-              <h3>{category.name}</h3>
-              <span className="shop-now">Shop Now →</span>
-            </div>
+      {/* ===== CATEGORIES SECTION ===== */}
+      <section className="categories-section">
+        <div className="categories-container">
+          <div className="section-header">
+            <span className="section-subtitle">Shop by Category</span>
+            <h2 className="section-title">Explore Our Collections</h2>
+            <div className="section-divider"></div>
           </div>
-        </Link>
-      ))}
-    </div>
-  </div>
-</section>
+          <div className="categories-grid">
+            {categories.map((category, index) => (
+              <Link to={category.link} key={index} className="category-card">
+                <div className="category-image">
+                  <img src={category.image} alt={category.name} />
+                  <div className="category-overlay">
+                    <h3>{category.name}</h3>
+                    <span className="shop-now">Shop Now →</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
-      {/* TikTok Videos Section - FIXED */}
+      {/* ===== TIKTOK SECTION ===== */}
       <section className="tiktok-section">
         <div className="tiktok-container">
           <div className="section-header">
@@ -300,21 +233,19 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Banner Section */}
+      {/* ===== BANNER SECTION ===== */}
       <section className="banner-section">
         <div className="banner-content">
-          <div className="banner-text">
-            <span className="banner-tag">Luxury Hire</span>
-            <h2>Shop Rental Collection</h2>
-            <p>Premium Afghani dresses &amp; accessories available to hire</p>
-            <Link to="/rental-shop" className="banner-btn">
-              Browse Rentals <FaArrowRight />
-            </Link>
-          </div>
+          <span className="banner-tag">Luxury Hire</span>
+          <h2>Shop Rental Collection</h2>
+          <p>Premium Afghani dresses & accessories available to hire</p>
+          <Link to="/rental-shop" className="banner-btn">
+            Browse Rentals <FaArrowRight />
+          </Link>
         </div>
       </section>
 
-      {/* Newsletter Section */}
+      {/* ===== NEWSLETTER SECTION ===== */}
       <section className="newsletter-section">
         <div className="container">
           <div className="newsletter-card">

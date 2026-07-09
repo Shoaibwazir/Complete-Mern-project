@@ -1,12 +1,13 @@
 /* AdminAddProduct.css - Fixed Input Visibility */
 
 /* ========================================
-   RESET & BASE
+   RESET & BASE (scoped to admin only)
    ======================================== */
-* {
+.admin-layout,
+.admin-layout *,
+.admin-layout *::before,
+.admin-layout *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 /* ========================================
