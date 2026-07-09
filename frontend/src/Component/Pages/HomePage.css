@@ -2,9 +2,36 @@
    HOMEPAGE COMPLETE STYLES - FULLY RESPONSIVE
    ============================================ */
 
+/* ===== 0. GLOBAL OVERFLOW / BOX-SIZING FIX =====
+   Fixes the issue where the hero image gets cut
+   off on the right side on mobile due to horizontal
+   scroll caused by an element wider than the viewport.
+   ================================================ */
+html,
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 /* ===== 1. Base Styles ===== */
 .homepage {
   overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -18,7 +45,17 @@
 .hero-slider {
   height: 85vh;
   width: 100%;
+  max-width: 100vw;
   --swiper-navigation-size: 18px;
+}
+
+/* Force swiper internals to respect viewport width
+   (prevents slides from overflowing and pushing the
+   page into horizontal scroll) */
+.hero-slider .swiper-wrapper,
+.hero-slider .swiper-slide {
+  width: 100% !important;
+  max-width: 100vw;
 }
 
 .hero-slide {
@@ -173,9 +210,8 @@
   
   .hero-slide {
     height: 60vh;
-    background-size: contain;
-    background-position: top center;
-    background-color: #1a1a1a;
+    background-size: cover;
+    background-position: center;
   }
   
   .hero-content {
@@ -199,30 +235,24 @@
   }
   
   .hero-title {
-    font-size: 0.9rem;
-    margin-bottom: 0.35rem;
+    font-size: 1.1rem;
+    margin-bottom: 0;
     letter-spacing: 0.04em;
     line-height: 1.2;
   }
-  
-  .hero-subtitle {
-    font-size: 0.65rem;
-    margin-bottom: 0.2rem;
-  }
-  
+
+  /* Hide subtitle/description on mobile - title only */
+  .hero-subtitle,
   .hero-desc {
-    font-size: 0.55rem;
-    margin-bottom: 0.75rem;
-    max-width: 100%;
-    line-height: 1.3;
-    padding: 0 0.25rem;
+    display: none;
   }
   
   .hero-btn {
-    padding: 0.3rem 0.8rem;
-    font-size: 0.6rem;
+    padding: 0.35rem 1rem;
+    font-size: 0.65rem;
     gap: 0.25rem;
     border-radius: 25px;
+    margin-top: 0.75rem;
   }
   
   .hero-btn svg {
@@ -256,9 +286,8 @@
   
   .hero-slide {
     height: 58vh;
-    background-size: contain;
-    background-position: top center;
-    background-color: #1a1a1a;
+    background-size: cover;
+    background-position: center;
   }
   
   .hero-content {
@@ -281,28 +310,23 @@
   }
   
   .hero-title {
-    font-size: 1.05rem;
-    margin-bottom: 0.4rem;
+    font-size: 1.3rem;
+    margin-bottom: 0;
     line-height: 1.2;
   }
-  
-  .hero-subtitle {
-    font-size: 0.7rem;
-    margin-bottom: 0.2rem;
-  }
-  
+
+  /* Hide subtitle/description on mobile - title only */
+  .hero-subtitle,
   .hero-desc {
-    font-size: 0.6rem;
-    margin-bottom: 0.9rem;
-    max-width: 100%;
-    line-height: 1.3;
+    display: none;
   }
   
   .hero-btn {
-    padding: 0.35rem 0.9rem;
-    font-size: 0.65rem;
+    padding: 0.4rem 1.1rem;
+    font-size: 0.7rem;
     gap: 0.3rem;
     border-radius: 25px;
+    margin-top: 0.85rem;
   }
   
   .hero-btn svg {
@@ -335,9 +359,8 @@
   
   .hero-slide {
     height: 55vh;
-    background-size: contain;
-    background-position: top center;
-    background-color: #1a1a1a;
+    background-size: cover;
+    background-position: center;
   }
   
   .hero-content {
@@ -360,28 +383,23 @@
   }
   
   .hero-title {
-    font-size: 1.3rem;
-    margin-bottom: 0.4rem;
+    font-size: 1.5rem;
+    margin-bottom: 0;
     line-height: 1.2;
   }
-  
-  .hero-subtitle {
-    font-size: 0.8rem;
-    margin-bottom: 0.25rem;
-  }
-  
+
+  /* Hide subtitle/description on mobile - title only */
+  .hero-subtitle,
   .hero-desc {
-    font-size: 0.7rem;
-    margin-bottom: 1rem;
-    max-width: 100%;
-    line-height: 1.4;
+    display: none;
   }
   
   .hero-btn {
-    padding: 0.4rem 1.1rem;
-    font-size: 0.7rem;
+    padding: 0.45rem 1.2rem;
+    font-size: 0.75rem;
     gap: 0.35rem;
     border-radius: 28px;
+    margin-top: 1rem;
   }
   
   .hero-btn svg {
@@ -434,17 +452,17 @@
   
   .hero-title {
     font-size: 1.8rem;
+    margin-bottom: 0;
   }
-  
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-  
+
+  /* Hide subtitle/description on mobile - title only */
+  .hero-subtitle,
   .hero-desc {
-    font-size: 0.85rem;
-    max-width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    display: none;
+  }
+
+  .hero-btn {
+    margin-top: 1.1rem;
   }
   
   .hero-slider .swiper-button-next,
@@ -496,10 +514,6 @@
   .hero-title {
     font-size: clamp(1rem, 4vw, 1.6rem);
   }
-  
-  .hero-desc {
-    font-size: clamp(0.6rem, 2vw, 0.8rem);
-  }
 }
 
 @media (max-height: 600px) and (orientation: portrait) {
@@ -524,24 +538,14 @@
   
   .hero-title {
     font-size: clamp(0.8rem, 3vw, 1.2rem);
-    margin-bottom: 0.25rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 0.65rem;
-    margin-bottom: 0.15rem;
-  }
-  
-  .hero-desc {
-    font-size: 0.55rem;
-    margin-bottom: 0.75rem;
-    line-height: 1.3;
+    margin-bottom: 0;
   }
   
   .hero-btn {
     padding: 0.3rem 0.8rem;
     font-size: 0.6rem;
     gap: 0.25rem;
+    margin-top: 0.75rem;
   }
 }
 
@@ -575,14 +579,10 @@
     font-size: clamp(0.8rem, 3vw, 1.4rem);
   }
   
-  .hero-desc {
-    font-size: clamp(0.5rem, 1.5vw, 0.75rem);
-    margin-bottom: 0.5rem;
-  }
-  
   .hero-btn {
     padding: 0.25rem 0.75rem;
     font-size: 0.6rem;
+    margin-top: 0.5rem;
   }
 }
 
