@@ -81,7 +81,7 @@ app.get('/', (req, res) => {
   });
 });
 
-// ✅ NEW: /api route (Fixed Blank Page Issue)
+// ✅ /api route (Fixed Blank Page Issue)
 app.get('/api', (req, res) => {
   res.json({
     success: true,
@@ -149,7 +149,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-// ✅ MONGODB CONNECTION
+// ✅ ===== MONGODB CONNECTION =====
+// ✅ FIXED: Always start the server for both dev and production
+
 mongoose.connect(process.env.MONGODB_URI, {
   serverSelectionTimeoutMS: 30000,
   connectTimeoutMS: 30000,
@@ -161,16 +163,19 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => {
   console.log('✅ MongoDB Connected');
   
-  // Local development only - VPS does not need app.listen()
-  if (process.env.NODE_ENV !== 'production') {
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => {
-      console.log(`✅ Server running on port ${PORT}`);
-    });
-  }
+  // ✅ Always start the server (for both development and production)
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`✅ Server running on port ${PORT}`);
+    console.log(`✅ Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`✅ API URL: http://localhost:${PORT}/api`);
+  });
 })
 .catch(err => {
   console.error('❌ MongoDB Connection Failed:', err.message);
+  console.error('❌ Please check your MONGODB_URI environment variable');
+  // Keep the process alive even if DB fails
+  // Or exit: process.exit(1);
 });
 
 mongoose.connection.on('error', (err) => {
@@ -183,12 +188,20 @@ mongoose.connection.on('disconnected', () => {
 
 // ✅ Graceful Shutdown
 process.on('SIGTERM', () => {
-  mongoose.connection.close(() => process.exit(0));
+  console.log('🛑 SIGTERM received, closing MongoDB connection...');
+  mongoose.connection.close(() => {
+    console.log('✅ MongoDB connection closed');
+    process.exit(0);
+  });
 });
 
 process.on('SIGINT', () => {
-  mongoose.connection.close(() => process.exit(0));
+  console.log('🛑 SIGINT received, closing MongoDB connection...');
+  mongoose.connection.close(() => {
+    console.log('✅ MongoDB connection closed');
+    process.exit(0);
+  });
 });
 
-// ✅ EXPORT FOR VERCEL
+// ✅ EXPORT FOR VERCEL (if needed)
 export default app;
