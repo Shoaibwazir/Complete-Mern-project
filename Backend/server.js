@@ -43,7 +43,9 @@ app.use(helmet({
 app.use(cors({
   origin: [
     "https://qasrelibas.co.uk",
-    "https://www.qasrelibas.co.uk"
+    "https://www.qasrelibas.co.uk",
+    "http://localhost:5173"
+  
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],

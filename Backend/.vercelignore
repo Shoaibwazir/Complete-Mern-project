@@ -1,0 +1,105 @@
+# =============================================
+# BACKEND - MOST IMPORTANT (Vercel ko batayein)
+# =============================================
+# Backend folder ko ignore karein taake Vercel sirf frontend build kare
+Backend/
+backend/
+
+# =============================================
+# NODE_MODULES
+# =============================================
+node_modules/
+Backend/node_modules/
+frontend/node_modules/
+**/node_modules/
+
+# =============================================
+# ENVIRONMENT VARIABLES (Security)
+# =============================================
+.env
+.env.*
+!.env.example
+Backend/.env
+frontend/.env
+*.env
+*.env.local
+*.env.*.local
+
+# =============================================
+# BUILD FILES
+# =============================================
+dist/
+build/
+frontend/dist/
+frontend/build/
+Backend/dist/
+Backend/build/
+*.tsbuildinfo
+
+# =============================================
+# LOGS
+# =============================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# =============================================
+# OS FILES
+# =============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+*.tmp
+*.temp
+
+# =============================================
+# IDE FILES
+# =============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.iml
+
+# =============================================
+# VERCEL FILES
+# =============================================
+.vercel/
+.vercel_cache/
+
+# =============================================
+# MISCELLANEOUS
+# =============================================
+*.pem
+*.key
+*.p12
+*.cert
+*.crt
+*.csr
+coverage/
+.nyc_output/
+.cache/
+.parcel-cache/
+.eslintcache
+*.bak
+*.orig
+*.rej
+
+# =============================================
+# GIT
+# =============================================
+.git/
+.gitignore
+.gitattributes
