@@ -1,12 +1,11 @@
 // Backend/server.js
-// ✅ PRODUCTION-READY for Vercel
+// ✅ PRODUCTION-READY for VPS
 
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import path from 'path';
-import fs from 'fs';
 import { fileURLToPath } from 'url';
 import helmet from 'helmet';
 import compression from 'compression';
@@ -45,7 +44,6 @@ app.use(cors({
     "https://qasrelibas.co.uk",
     "https://www.qasrelibas.co.uk",
     "http://localhost:5173"
-  
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
@@ -64,25 +62,61 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// ✅ ROUTES
+// ✅ ===== ROUTES =====
+
+// API Root
 app.get('/', (req, res) => {
   res.json({
     success: true,
     message: 'QASR-E-LIBAS LTD API',
     status: 'running',
-    environment: process.env.NODE_ENV || 'production'
+    environment: process.env.NODE_ENV || 'production',
+    endpoints: {
+      api: '/api',
+      health: '/api/health',
+      auth: '/api/auth',
+      products: '/api/products',
+      orders: '/api/orders'
+    }
   });
 });
 
+// ✅ NEW: /api route (Fixed Blank Page Issue)
+app.get('/api', (req, res) => {
+  res.json({
+    success: true,
+    message: 'QASR-E-LIBAS LTD API v2',
+    status: 'running',
+    environment: process.env.NODE_ENV || 'production',
+    timestamp: new Date().toISOString(),
+    endpoints: {
+      health: '/api/health',
+      auth: '/api/auth',
+      products: '/api/products',
+      orders: '/api/orders',
+      uploads: '/api/upload',
+      reviews: '/api/reviews',
+      coupons: '/api/coupons',
+      returns: '/api/returns',
+      contact: '/api/contact/support-email',
+      payment: '/api/create-payment-intent',
+      tiktok: '/api/tiktok/active'
+    }
+  });
+});
+
+// Health Check
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     success: true,
     status: 'healthy',
     timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
     database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected'
   });
 });
 
+// ✅ API ROUTES
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/orders', orderRoutes);
@@ -106,7 +140,7 @@ app.use((req, res) => {
   });
 });
 
-// ✅ Error Handler
+// ✅ Global Error Handler
 app.use((err, req, res, next) => {
   console.error('❌ Error:', err.message);
   res.status(err.statusCode || 500).json({
@@ -126,8 +160,8 @@ mongoose.connect(process.env.MONGODB_URI, {
 })
 .then(() => {
   console.log('✅ MongoDB Connected');
-
-  // Local development only - Vercel does not need app.listen()
+  
+  // Local development only - VPS does not need app.listen()
   if (process.env.NODE_ENV !== 'production') {
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => {
